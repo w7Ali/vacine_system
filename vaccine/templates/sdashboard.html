@@ -1,0 +1,73 @@
+{% extends 'userHeader.html' %}
+{% block main %}
+
+<div class="card shadow mt-3">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 4px solid green;">Welcome Administrator</h5>
+        <div class="container-fluid mt-3">
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <a href="#" class="text-dark">
+                                <div class="info-box">
+										<span class="info-box-icon bg-info elevation-1"><i
+                                                class="fas fa-syringe"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Vaccine List</span> <span
+                                            class="info-box-number"> {{totalvlist}}
+											</span>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <a href="#" class="text-dark">
+                                <div class="info-box mb-3">
+										<span class="info-box-icon bg-danger elevation-1"><i
+                                                class="fas fa-home"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Vaccination Center</span> <span
+                                            class="info-box-number"> {{totalvcenter}}
+											</span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+
+
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <a href="{% url 'staffindividual' %}" class="text-dark">
+                                <div class="info-box mb-3">
+										<span class="info-box-icon bg-success elevation-1"><i
+                                                class="fas fa-syringe"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Fully Vaccinated</span> <span
+                                            class="info-box-number"> {{totalfulvacc}}
+											</span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+    </div>
+</div>
+</div>
+
+{% endblock %}

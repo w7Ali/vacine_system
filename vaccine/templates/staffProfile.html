@@ -1,0 +1,65 @@
+{% extends 'userHeader.html' %}
+{% load static %}
+{% block main %}
+
+<div class="container mt-5">
+    <div class="col-sm-12 p-2">
+
+        <div class="card">
+            <div class="card-body">
+                <h4><center>{{memberlist.user.first_name}} {{memberlist.user.last_name}}</center></h4>
+                <hr>
+
+
+                <DIV class="row">
+                    <div class="col-md-3 offset-3">
+                        <b>Profile Pic : </b>
+                    </div>
+                    {% if not memberlist.Image %}
+                    <div class="col-md-3" style="text-transform: capitalize">
+                        <img src="{% static 'images/nopic.jpg' %}" class="rounded-circle" width="100" height="70">
+                    </div>
+                    {% else %}
+                    <div class="col-md-3" style="text-transform: capitalize">
+                        <img src="{{memberlist.Image.url}}" class="rounded-circle" width="100" height="70">
+                    </div>
+                    {% endif %}
+                </DIV>
+                <hr>
+
+                <DIV class="row">
+                    <div class="col-md-3 offset-3">
+                        <b>Username : </b>
+                    </div>
+                    <div class="col-md-3">
+                        {{memberlist.user.username}}
+                    </div>
+                </DIV>
+                <hr>
+
+                <DIV class="row">
+                    <div class="col-md-3 offset-3">
+                        <b>Role : </b>
+                    </div>
+                    <div class="col-md-3">
+                        {{memberlist.Role}}
+                    </div>
+                </DIV>
+                <hr>
+
+                <DIV class="row">
+                    <div class="col-md-3 offset-3">
+                        <b>Vaccination Area : </b>
+                    </div>
+                    <div class="col-md-3" style="text-transform: capitalize">
+                        {{memberlist.location}}
+                    </div>
+                </DIV>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

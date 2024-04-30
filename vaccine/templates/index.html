@@ -1,0 +1,699 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Vaccine Tracker System - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+    <link href="{% static 'js/jquer.min.js' %}" rel="apple-touch-icon">
+
+    jquer.min.js
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <style>
+            /* Add styles for the dropdown toggle button */
+        #city-link {
+            cursor: pointer;
+        }
+        .dropdown {
+            position: absolute;
+            top: 100%; /* Position it just below the button */
+            left: 0;
+            font-family: 'Cabin Condensed', sans-serif;
+            z-index: 1000; /* Ensure it's above other content */
+            display: none; /* Initially hide it */
+        }
+
+        #city-link:focus + .dropdown,
+        .dropdown:hover {
+            display: block; /* Show the dropdown on focus or hover */
+        }
+        .dropbtn {
+
+            cursor: pointer;
+        }
+
+            .dropbtn:hover, .dropbtn:focus {
+            color: rgb(250, 250, 253);
+        }
+
+        #myInput 
+        {
+            box-sizing: border-box;
+            background-image: url('searchicon.png');
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #myInput:focus {
+            outline: 3px solid #ddd;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown a:hover {
+            background-color: #ddd;}
+
+        .show {
+            display: block;}
+
+    </style>
+    
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+
+        <h1 class="logo me-auto"><a href="{% url 'index' %}"><span style="text-shadow: 1px 1px 1px white;">Vaccine Tracker System </span></a></h1>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <div class="dropdown">
+                    <li onclick="myFunction()" class="dropbtn">Hospitals</li>
+                    <div id="myDropdown" class="dropdown-content">
+                      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                    </div>
+                  </div>
+                <li><a href="{% url 'index' %}" class="active">Home</a></li>
+                <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
+                <li><a href="{% url 'staff_login' %}">Staff Login</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+
+
+    </div>
+
+</header><!-- End Header -->
+    
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active"
+                 style="background-image: url({% static 'assets/img/slide/slide-1.jpg' %})">
+                <div class="carousel-container">
+                    <div class="container">
+                        <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Vaccine Tracker System</span>
+                        </h2>
+                        <p class="animate__animated animate__fadeInUp">Equitable access to safe and effective vaccines
+                            is critical to ending the COVID-19 pandemic, so it is hugely encouraging to see so many
+                            vaccines proving and going into development.</p>
+                        <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read
+                            More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item" style="background-image: url({% static 'assets/img/slide/slide-2.jpg' %})">
+                <div class="carousel-container">
+                    <div class="container">
+                        <h2 class="animate__animated animate__fadeInDown">Emergency Use Listing</h2>
+                        <p class="animate__animated animate__fadeInUp">WHO declared a public health emergency of
+                            international concern (PHEIC), shortly after the etiological agent causing the new
+                            respiratory disease later called Covid-19 had been isolated and the first genomic sequence
+                            had been completed.</p>
+                        <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read
+                            More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item" style="background-image: url({% static 'assets/img/slide/slide-3.jpg' %})">
+                <div class="carousel-container">
+                    <div class="container">
+                        <h2 class="animate__animated animate__fadeInDown">Vaccine country Readiness and Delivery</h2>
+                        <p class="animate__animated animate__fadeInUp">Country Readiness and Delivery (CRD) workstream
+                            is part of COVAX, the vaccines pillar of the Access to COVID-19 Tools (ACT) Accelerator.
+                            Through the CRD workstream, WHO, UNICEF, the GAVI Secretariat, and partners are working
+                            together at the global and regional levels to develop and disseminate adaptable global
+                            resources (e.g., guidance, trainings, tools, and communication materials) and coordinate and
+                            provide technical assistance to support the implementation of COVID-19 vaccines.</p>
+                        <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read
+                            More</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+
+    </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container">
+
+            <div class="row content">
+                <div class="col-lg-6">
+                    <h2>We are tracking the progress of Vaccine</h2>
+                    <h3>Vaccine candidates to monitor the latest developments</h3>
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0">
+                    <p>
+                        To bring this pandemic to an end, a large share of the world needs to be immune to the virus. The
+                        safest way to achieve this is with a vaccine. Vaccines are a technology that humanity has often
+                        relied on in the past to bring down the death toll of infectious diseases.
+                    </p>
+                    <ul>
+                        <li><i class="ri-check-double-line"></i> Data sources: at the end of this page you find a detailed list of all our country-specific sources.
+                        </li>
+                        <li><i class="ri-check-double-line"></i> Open access: as with all of our data, we are making this dataset openly available, so that everyone can check and use the data that we bring together.
+                            velit
+                        </li>
+                        <li><i class="ri-check-double-line"></i> The first chart details vaccine candidates that are still in development to address the lack of vaccines and access in many countries around the world.
+                        </li>
+                    </ul>
+                    <p class="fst-italic">
+                        Allows users to search for COVID-19 vaccines through various criteria such as vaccine platform, schedule of vaccination, route of administration, developer, trial phase and clinical endpoints.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End About Section -->
+
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="icon-box">
+                        <i class="bi bi-briefcase"></i>
+                        <h4><a href="#">Approved Vaccines</a></h4>
+                        <p>The vaccines are those that have been approved, authorized, licensed, granted emergency use
+                            authorization, or made available for use outside of clinical trials via any pathway by a
+                            regulatory agency.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <i class="bi bi-card-checklist"></i>
+                        <h4><a href="#">Countries with Approved Vaccines</a></h4>
+                        <p>Countries shown are those for which Our World In Data reports vaccination rates. Individuals
+                            who have received all doses recommended according to the vaccination regimen are considered
+                            fully vaccinated.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <i class="bi bi-bar-chart"></i>
+                        <h4><a href="#">WHO EUL Vaccines</a></h4>
+                        <p>Provides summary tables of COVID-19 vaccine candidates in both clinical and pre-clinical development.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <i class="bi bi-binoculars"></i>
+                        <h4><a href="#">Vaccine Candidates</a></h4>
+                        <p>Provides links to published reports on safety, immunogenicity and efficacy data of the vaccine candidates.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <i class="bi bi-brightness-high"></i>
+                        <h4><a href="#">Vaccine Trial</a></h4>
+                        <p>Tracks the progress of each vaccine from pre-clinical, Phase 1, Phase 2 through to Phase 3 efficacy studies and including Phase 4 registered as interventional studies.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <i class="bi bi-calendar4-week"></i>
+                        <h4><a href="#">Countries with Vaccine Trials</a></h4>
+                        <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta
+                            nobis est eligendi</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <ul id="portfolio-flters">
+                        <li data-filter="*" class="filter-active">All</li>
+                        <li data-filter=".filter-app">Injection</li>
+                        <li data-filter=".filter-card">Vaccine</li>
+                        <li data-filter=".filter-web">Web</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row portfolio-container">
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="{% static 'assets/img/portfolio/portfolio-1.jpg' %}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Vaccine 1</h4>
+                            <p>Vaccine</p>
+                            <div class="portfolio-links">
+                                <a href="{% static 'assets/img/portfolio/portfolio-1.jpg' %}"
+                                   data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i
+                                        class="bx bx-plus"></i></a>
+                                <a href="#" class="portfolio-details-lightbox" data-glightbox="type: external"
+                                   title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                        <img src="{% static 'assets/img/portfolio/portfolio-2.jpg' %}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>web 1</h4>
+                            <p>web</p>
+                            <div class="portfolio-links">
+                                <a href="{% static 'assets/img/portfolio/portfolio-2.jpg' %}"
+                                   data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i
+                                        class="bx bx-plus"></i></a>
+                                <a href="#" class="portfolio-details-lightbox" data-glightbox="type: external"
+                                   title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="{% static 'assets/img/portfolio/portfolio-3.jpg' %}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Injection 2</h4>
+                            <p>Injection</p>
+                            <div class="portfolio-links">
+                                <a href="{% static 'assets/img/portfolio/portfolio-3.jpg' %}"
+                                   data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i
+                                        class="bx bx-plus"></i></a>
+                                <a href="#" class="portfolio-details-lightbox" data-glightbox="type: external"
+                                   title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="portfolio-wrap">
+                        <img src="{% static 'assets/img/portfolio/portfolio-4.jpg' %}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Vaccine 2</h4>
+                            <p>Vaccine</p>
+                            <div class="portfolio-links">
+                                <a href="{% static 'assets/img/portfolio/portfolio-4.jpg' %}"
+                                   data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i
+                                        class="bx bx-plus"></i></a>
+                                <a href="portfolio-details.html" class="portfolio-details-lightbox"
+                                   data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                        <img src="{% static 'assets/img/portfolio/portfolio-5.jpg' %}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Web 2</h4>
+                            <p>Web</p>
+                            <div class="portfolio-links">
+                                <a href="{% static 'assets/img/portfolio/portfolio-5.jpg' %}"
+                                   data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i
+                                        class="bx bx-plus"></i></a>
+                                <a href="portfolio-details.html" class="portfolio-details-lightbox"
+                                   data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="{% static 'assets/img/portfolio/portfolio-6.jpg' %}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Injection 3</h4>
+                            <p>Injection</p>
+                            <div class="portfolio-links">
+                                <a href="{% static 'assets/img/portfolio/portfolio-6.jpg' %}"
+                                   data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i
+                                        class="bx bx-plus"></i></a>
+                                <a href="#" class="portfolio-details-lightbox" data-glightbox="type: external"
+                                   title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="portfolio-wrap">
+                        <img src="{% static 'assets/img/portfolio/portfolio-7.jpg' %}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Vaccine 1</h4>
+                            <p>Vaccine</p>
+                            <div class="portfolio-links">
+                                <a href="{% static 'assets/img/portfolio/portfolio-7.jpg' %}"
+                                   data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i
+                                        class="bx bx-plus"></i></a>
+                                <a href="#" class="portfolio-details-lightbox" data-glightbox="type: external"
+                                   title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="portfolio-wrap">
+                        <img src="{% static 'assets/img/portfolio/portfolio-8.jpg' %}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Vaccine 3</h4>
+                            <p>Vaccine</p>
+                            <div class="portfolio-links">
+                                <a href="{% static 'assets/img/portfolio/portfolio-8.jpg' %}"
+                                   data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i
+                                        class="bx bx-plus"></i></a>
+                                <a href="#" class="portfolio-details-lightbox" data-glightbox="type: external"
+                                   title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                        <img src="{% static 'assets/img/portfolio/portfolio-9.jpg' %}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Web 3</h4>
+                            <p>Web</p>
+                            <div class="portfolio-links">
+                                <a href="{% static 'assets/img/portfolio/portfolio-9.jpg'%}"
+                                   data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i
+                                        class="bx bx-plus"></i></a>
+                                <a href="#" class="portfolio-details-lightbox" data-glightbox="type: external"
+                                   title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Portfolio Section -->
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-info">
+                        <h3>Vaccine Tracker System</h3>
+                        <p>
+                            C-Sector Indrapuri <br>
+                            Madhya Pradesh, India<br><br>
+                            <strong>Phone:</strong> +91 1234 5678 90<br>
+                            <strong>Email:</strong> abc123@gmail.com<br>
+                        </p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 footer-newsletter">
+                    <h4>Our Newsletter</h4>
+                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="email" name="email"><input type="submit" value="Subscribe">
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span>Vaccine Tracker System</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <a href="#">Panjwani Team</a>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'assets/js/main.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+</body>
+     <script>
+
+//////////////////////////////////////////////
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+  const input = document.getElementById("myInput");
+  const filter = input.value.toUpperCase();
+  const div = document.getElementById("myDropdown");
+  const a = div.getElementsByTagName("a");
+  for (let i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+
+// Fetch data from API and populate dropdown
+fetch('hospitals/cities_json/')
+  .then(response => response.json())
+  .then(data => {
+    const cities = data.cities;
+    const dropdownContent = document.getElementById('myDropdown');
+    cities.forEach(city => {
+      const a = document.createElement('a');
+      a.textContent = city.name;
+      a.href = `hospitals/hospitals_json/${city.name}`;
+      
+      // Add event listener for hovering or clicking on the city link
+      a.addEventListener('mouseover', function() {
+        fetchHospitals(city.name);
+      });
+      
+      dropdownContent.appendChild(a);
+    });
+  })
+  .catch(error => console.error('Error fetching data:', error));
+
+// Function to fetch and display hospitals for a given city
+function fetchHospitals(cityName) {
+  fetch(`hospitals/hospitals_json/${cityName}`)
+    .then(response => response.json())
+    .then(data => {
+      // Display hospitals in some container (e.g., a div)
+      const hospitalsContainer = document.getElementById('hospitalsContainer');
+      hospitalsContainer.innerHTML = ''; // Clear previous content
+
+      data.hospitals.forEach(hospital => {
+        const hospitalDiv = document.createElement('div');
+        hospitalDiv.textContent = hospital.name; // Display hospital name, you can adjust it as needed
+        hospitalsContainer.appendChild(hospitalDiv);
+      });
+    })
+    .catch(error => console.error('Error fetching hospitals:', error));
+}
+
+//////////////////////////////////////////////
+// $(document).ready(function () {
+//             // Event listener for city link click
+//             $('#city-link').click(function (event) {
+//                 console.log("clicked");
+//                 event.preventDefault();
+//                 fetchCityList();
+//             });
+
+//             // Function to fetch city list using AJAX
+//             function fetchCityList() {
+//                 $.ajax({
+//                     url: '/hospitals/cities_json/', // URL to your JSON endpoint
+//                     type: 'GET',
+//                     dataType: 'json',
+//                     success: function (response) {
+//                         renderCityDropdown(response.cities);
+//                     },
+//                     error: function (xhr, status, error) {
+//                         console.error(xhr.responseText);
+//                     }
+//                 });
+//             }
+
+//             // Function to render city dropdown
+//             function renderCityDropdown(cities) {
+//                 console.log(cities);
+//                 var dropdownContent = $('#city-dropdown');
+//                 dropdownContent.empty();
+//                 cities.forEach(function (city) {
+//                     dropdownContent.append('<li class="city-item" data-city-id="' + city.id + '">' + city.name + '</li>');
+//                 });
+//             }
+
+//             // Event listener for city item click
+//             $(document).on('click', '.city-item', function (event) {
+//                 event.preventDefault();
+//                 var cityId = $(this).data('city-id');
+//                 fetchHospitalList(cityId);
+//             });
+
+//             // Function to fetch hospital list using AJAX
+//             function fetchHospitalList(cityId) {
+//                 $.ajax({
+//                     url: '/hospitals/?city_id=' + cityId, // URL to your hospital_list view
+//                     type: 'GET',
+//                     dataType: 'json',
+//                     success: function (response) {
+//                         renderHospitalDropdown(response.hospitals);
+//                     },
+//                     error: function (xhr, status, error) {
+//                         console.error(xhr.responseText);
+//                     }
+//                 });
+//             }
+
+//             // Function to render hospital dropdown menu
+//             function renderHospitalDropdown(hospitals) {
+//                 var dropdownContent = $('#hospital-dropdown');
+//                 dropdownContent.empty(); // Clear previous data
+//                 var dropdownHTML = '<ul>';
+//                 hospitals.forEach(function (hospital) {
+//                     dropdownHTML += '<li>' + hospital.name + '</li>';
+//                 });
+//                 dropdownHTML += '</ul>';
+//                 dropdownContent.html(dropdownHTML); // Insert new data
+
+//                 // Show hospital dropdown
+//                 dropdownContent.show();
+//             }
+//         });
+
+</script>
+</html>

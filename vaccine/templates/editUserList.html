@@ -1,0 +1,70 @@
+{% extends 'header.html' %}
+{% block main %}
+
+<div class="card shadow mt-3">
+    <div class="card-body">
+        <h4 class="p-2" style="border-bottom: 2px solid green;">Update User List</h4>
+        <div class="container-fluid mt-3">
+            <div class="form-group">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <label>First Name</label>
+                    <input type="text" name="FirstName" value="{{memberlist.user.first_name}}" class="form-control">
+
+                    <label>Last Name</label>
+                    <input type="text" name="LastName" value="{{memberlist.user.last_name}}" class="form-control">
+
+                    <label>Email ID</label>
+                    <input type="email" name="EmailId" value="{{memberlist.user.username}}" class="form-control" readonly>
+
+                    <label>Role</label>
+                    <select name="Role" class="form-control">
+                        <option value="{{memberlist.Role}}">{{memberlist.Role}}</option>
+                        <option value="Administrator">Administrator</option>
+                        <option value="Staff">Staff</option>
+                    </select>
+
+                    <label>Vaccination Area</label>
+                    <select class="form-control" name="location">
+                        <option value="{{memberlist.location.id}}">{{memberlist.location.Location}}</option>
+                        {% for i in vlocation %}
+                        <option value="{{i.id}}">{{i.Location}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Upload Profile</label>
+                            <input type="file" name="Image" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <img src="{{memberlist.Image.url}}" name="Image" height="100" width="100">
+                        </div>
+                    </div>
+                    <br>
+                    <input type="submit" value="Update" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% if error ==  "no" %}
+<script>
+    alert('User details updated');
+
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert('Something Went Wrong. Please try again');
+</script>
+{% endif %}
+
+{% endblock %}
