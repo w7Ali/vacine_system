@@ -1,0 +1,69 @@
+{% extends 'header.html' %}
+{% block main %}
+{% load static %}
+
+<div class="card shadow mt-3">
+    <div class="card-body">
+        <h4 class="p-2" style="border-bottom: 2px solid green;">Update City</h4>
+        <div class="container-fluid mt-3">
+            <div class="form-group">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" value="{{ city.name }}" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if error == "no" %}
+<script>
+    alert('City has been Updated');
+    window.location = '{% url 'city_list' %}';
+</script>
+{% endif %}
+{% if error == "yes" %}
+<script>
+    alert('Something Went Wrong. Please try again');
+</script>
+{% endif %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(form);
+            const cityId = "{{ city.id }}"; // Get the city ID
+
+            // Send a POST request to the city_update URL
+            fetch("{% url 'city_update' city.id %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}", // Include the CSRF token
+                },
+                body: formData,
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("City has been updated.");
+                    window.location.href = "{% url 'city_list' %}"; // Redirect to the city list page
+                } else {
+                    alert("Something went wrong. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    });
+</script>
+
+
+{% endblock %}

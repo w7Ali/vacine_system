@@ -102,6 +102,13 @@
 
         .show {
             display: block;}
+        /* Add styles for the hospitals container */
+      
+
+        /* Style for individual hospital entries */
+        .hospital {
+            margin-bottom: 5px; /* Adjust as needed */
+        }
 
     </style>
     
@@ -111,30 +118,31 @@
 
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top d-flex align-items-center">
+    
     <div class="container d-flex align-items-center">
-
         <h1 class="logo me-auto"><a href="{% url 'index' %}"><span style="text-shadow: 1px 1px 1px white;">Vaccine Tracker System </span></a></h1>
-
         <nav id="navbar" class="navbar">
             <ul>
                 <div class="dropdown">
                     <li onclick="myFunction()" class="dropbtn">Hospitals</li>
                     <div id="myDropdown" class="dropdown-content">
-                      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
                     </div>
-                  </div>
+                </div>
+                <div id="hospitalsContainer" class="dropdown-content"></div>
+                
+            
+                
                 <li><a href="{% url 'index' %}" class="active">Home</a></li>
                 <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
                 <li><a href="{% url 'staff_login' %}">Staff Login</a></li>
             </ul>
+            
+            
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
-
-
     </div>
-
 </header><!-- End Header -->
-    
 <!-- ======= Hero Section ======= -->
 <section id="hero">
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -563,137 +571,84 @@
 
 </body>
      <script>
-
-//////////////////////////////////////////////
 function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-function filterFunction() {
-  const input = document.getElementById("myInput");
-  const filter = input.value.toUpperCase();
-  const div = document.getElementById("myDropdown");
-  const a = div.getElementsByTagName("a");
-  for (let i = 0; i < a.length; i++) {
-    txtValue = a[i].textContent || a[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      a[i].style.display = "";
-    } else {
-      a[i].style.display = "none";
+      document.getElementById("myDropdown").classList.toggle("show");
     }
-  }
-}
 
-// Fetch data from API and populate dropdown
-fetch('hospitals/cities_json/')
-  .then(response => response.json())
-  .then(data => {
-    const cities = data.cities;
-    const dropdownContent = document.getElementById('myDropdown');
-    cities.forEach(city => {
-      const a = document.createElement('a');
-      a.textContent = city.name;
-      a.href = `hospitals/hospitals_json/${city.name}`;
-      
-      // Add event listener for hovering or clicking on the city link
-      a.addEventListener('mouseover', function() {
-        fetchHospitals(city.name);
-      });
-      
-      dropdownContent.appendChild(a);
-    });
-  })
-  .catch(error => console.error('Error fetching data:', error));
+    function filterFunction() {
+      const input = document.getElementById("myInput");
+      const filter = input.value.toUpperCase();
+      const div = document.getElementById("myDropdown");
+      const a = div.getElementsByTagName("a");
+      for (let i = 0; i < a.length; i++) {
+        txtValue = a[i].textContent || a[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          a[i].style.display = "";
+        } else {
+          a[i].style.display = "none";
+        }
+      }
+    }
 
-// Function to fetch and display hospitals for a given city
-function fetchHospitals(cityName) {
-  fetch(`hospitals/hospitals_json/${cityName}`)
-    .then(response => response.json())
-    .then(data => {
-      // Display hospitals in some container (e.g., a div)
-      const hospitalsContainer = document.getElementById('hospitalsContainer');
-      hospitalsContainer.innerHTML = ''; // Clear previous content
+    // Fetch data from API and populate dropdown
+    fetch('hospitals/cities_json/')
+      .then(response => response.json())
+      .then(data => {
+        const cities = data.cities;
+        const dropdownContent = document.getElementById('myDropdown');
+        cities.forEach(city => {
+          const a = document.createElement('a');
+          a.textContent = city.name;
+          a.href = '#'; // Set a dummy href
 
-      data.hospitals.forEach(hospital => {
-        const hospitalDiv = document.createElement('div');
-        hospitalDiv.textContent = hospital.name; // Display hospital name, you can adjust it as needed
-        hospitalsContainer.appendChild(hospitalDiv);
-      });
-    })
-    .catch(error => console.error('Error fetching hospitals:', error));
-}
+          // Add event listener for hovering or clicking on the city link
+          a.addEventListener('mouseover', function() {
+            fetchHospitals(city.name);
+          });
 
-//////////////////////////////////////////////
-// $(document).ready(function () {
-//             // Event listener for city link click
-//             $('#city-link').click(function (event) {
-//                 console.log("clicked");
-//                 event.preventDefault();
-//                 fetchCityList();
-//             });
+          dropdownContent.appendChild(a);
+        });
+      })
+      .catch(error => console.error('Error fetching data:', error));
 
-//             // Function to fetch city list using AJAX
-//             function fetchCityList() {
-//                 $.ajax({
-//                     url: '/hospitals/cities_json/', // URL to your JSON endpoint
-//                     type: 'GET',
-//                     dataType: 'json',
-//                     success: function (response) {
-//                         renderCityDropdown(response.cities);
-//                     },
-//                     error: function (xhr, status, error) {
-//                         console.error(xhr.responseText);
-//                     }
-//                 });
-//             }
+      fetch(`hospitals/hospitals_json/${cityName}`)
+      .then(response => response.json())
+      .then(data => {
+        const cities = data.hospitals;
+        const dropdownContent = document.getElementById('hospitalsContainer');
+        data.hospitals.forEach(hospital => {
+          const a = document.createElement('a');
+          a.textContent = hospital.name;
+          a.href = '#'; // Set a dummy href
 
-//             // Function to render city dropdown
-//             function renderCityDropdown(cities) {
-//                 console.log(cities);
-//                 var dropdownContent = $('#city-dropdown');
-//                 dropdownContent.empty();
-//                 cities.forEach(function (city) {
-//                     dropdownContent.append('<li class="city-item" data-city-id="' + city.id + '">' + city.name + '</li>');
-//                 });
-//             }
+          // Add event listener for hovering or clicking on the city link
+          a.addEventListener('mouseover', function() {
+            fetchHospitals(city.name);
+          });
 
-//             // Event listener for city item click
-//             $(document).on('click', '.city-item', function (event) {
-//                 event.preventDefault();
-//                 var cityId = $(this).data('city-id');
-//                 fetchHospitalList(cityId);
-//             });
+          dropdownContent.appendChild(a);
+        });
+      })
+      .catch(error => console.error('Error fetching data:', error));
 
-//             // Function to fetch hospital list using AJAX
-//             function fetchHospitalList(cityId) {
-//                 $.ajax({
-//                     url: '/hospitals/?city_id=' + cityId, // URL to your hospital_list view
-//                     type: 'GET',
-//                     dataType: 'json',
-//                     success: function (response) {
-//                         renderHospitalDropdown(response.hospitals);
-//                     },
-//                     error: function (xhr, status, error) {
-//                         console.error(xhr.responseText);
-//                     }
-//                 });
-//             }
+    // Function to fetch and display hospitals for a given city
+    function fetchHospitals(cityName) {
+      fetch(`hospitals/hospitals_json/${cityName}`)
+        .then(response => response.json())
+        .then(data => {
+          // Display hospitals in the hospitalsContainer
+          const hospitalsContainer = document.getElementById('hospitalsContainer');
+          hospitalsContainer.innerHTML = ''; // Clear previous content
 
-//             // Function to render hospital dropdown menu
-//             function renderHospitalDropdown(hospitals) {
-//                 var dropdownContent = $('#hospital-dropdown');
-//                 dropdownContent.empty(); // Clear previous data
-//                 var dropdownHTML = '<ul>';
-//                 hospitals.forEach(function (hospital) {
-//                     dropdownHTML += '<li>' + hospital.name + '</li>';
-//                 });
-//                 dropdownHTML += '</ul>';
-//                 dropdownContent.html(dropdownHTML); // Insert new data
-
-//                 // Show hospital dropdown
-//                 dropdownContent.show();
-//             }
-//         });
-
+          data.hospitals.forEach(hospital => {
+            const hospitalDiv = document.createElement('div');
+            hospitalDiv.textContent = hospital.name;
+            hospitalDiv.classList.add('hospital'); // Add the 'hospital' class
+            hospitalsContainer.appendChild(hospitalDiv);
+            console.log(hospital.name);
+          });
+        })
+        .catch(error => console.error('Error fetching hospitals:', error));
+    }
 </script>
 </html>

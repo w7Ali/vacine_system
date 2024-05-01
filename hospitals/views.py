@@ -4,6 +4,24 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.http import JsonResponse
 from .models import City, Hospital
 from .forms import CityForm, HospitalForm
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .forms import HospitalForm
+
+from django.urls import reverse
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAdminUser
+from rest_framework.response import Response
+from rest_framework import status
+
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework.permissions import IsAdminUser
+from django.shortcuts import get_object_or_404, redirect, render
+from .models import Hospital
+
+from django.http import JsonResponse
 # Create your views here.
 def hospital(request):
 
@@ -14,23 +32,32 @@ def hospital(request):
 @login_required
 def city_list(request):
     cities = City.objects.all()
-    return render(request, 'city_list.html', {'cities': cities})
+    return render(request, 'hospitals/city_list.html', {'cities': cities})
 
 @login_required
 def city_detail(request, pk):
     city = get_object_or_404(City, pk=pk)
     return render(request, 'city_detail.html', {'city': city})
 
-@staff_member_required
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
 def city_create(request):
     if request.method == 'POST':
         form = CityForm(request.POST)
         if form.is_valid():
             city = form.save()
-            return redirect('city_detail', pk=city.pk)
-    else:
-        form = CityForm()
-    return render(request, 'city_form.html', {'form': form})
+            # Get the URL for the 'hospital_list' view
+            url = reverse('city_list')
+            # Redirect to the 'hospital_list' URL
+            return redirect('city_list')
+        return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import City
+from .forms import CityForm
+from django.contrib.admin.views.decorators import staff_member_required
 
 @staff_member_required
 def city_update(request, pk):
@@ -39,10 +66,11 @@ def city_update(request, pk):
         form = CityForm(request.POST, instance=city)
         if form.is_valid():
             form.save()
-            return redirect('city_detail', pk=city.pk)
+            return redirect('city_list')
     else:
         form = CityForm(instance=city)
-    return render(request, 'city_form.html', {'form': form})
+    return render(request, 'hospitals/editCity.html', {'form': form, 'city': city})
+
 
 @staff_member_required
 def city_delete(request, pk):
@@ -58,23 +86,32 @@ def city_delete(request, pk):
 @login_required
 def hospital_list(request):
     hospitals = Hospital.objects.all()
-    return render(request, 'hospital_list.html', {'hospitals': hospitals})
+    cities = City.objects.all()
+    return render(request, 'hospitals/hospitals_lists.html', {'hospitals': hospitals, "cities":cities})
 
 @login_required
 def hospital_detail(request, pk):
     hospital = get_object_or_404(Hospital, pk=pk)
-    return render(request, 'hospital_detail.html', {'hospital': hospital})
+    return render(request, 'hospitals_lists.html', {'hospital': hospital})
 
-@staff_member_required
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
 def hospital_create(request):
     if request.method == 'POST':
         form = HospitalForm(request.POST)
         if form.is_valid():
             hospital = form.save()
-            return redirect('hospital_detail', pk=hospital.pk)
-    else:
-        form = HospitalForm()
-    return render(request, 'hospital_form.html', {'form': form})
+            # Get the URL for the 'hospital_list' view
+            url = reverse('hospital_list')
+            # Redirect to the 'hospital_list' URL
+            return redirect('hospital_list')
+        return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
+
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Hospital
+from .forms import HospitalForm
+from django.contrib.admin.views.decorators import staff_member_required
 
 @staff_member_required
 def hospital_update(request, pk):
@@ -86,7 +123,8 @@ def hospital_update(request, pk):
             return redirect('hospital_detail', pk=hospital.pk)
     else:
         form = HospitalForm(instance=hospital)
-    return render(request, 'hospital_form.html', {'form': form})
+    return render(request, 'hospitals/editHospital.html', {'form': form})
+
 
 @staff_member_required
 def hospital_delete(request, pk):
