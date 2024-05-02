@@ -1,0 +1,364 @@
+{% load static %}
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/all.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/adminlte.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/OverlayScrollbars.css' %}" rel="stylesheet"/>
+    <link rel="icon" href="{% static 'images/logo.jpg' %}"/>
+    <link rel="stylesheet"
+        href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+    <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/all.js' %}"></script>
+    <script src="{% static 'js/adminlte.js' %}"></script>
+    <script src="{% static 'js/jquery.overlayScrollbars.js' %}"></script>
+    <script
+            src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script
+            src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script
+            src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+
+    <!-- Start data table -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.bootstrap4.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+    var table = $('#example').DataTable( {
+        lengthChange: false,
+        buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+    } );
+
+    table.buttons().container()
+        .appendTo( '#example_wrapper .col-md-6:eq(0)' );
+} );
+
+
+    </script>
+
+    <!-- End Data Table -->
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <style>
+
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.content-wrapper {
+    background-color: rgba(255, 255, 255, 0.068);
+    padding: 20px;
+}
+
+
+
+marquee ul {
+    padding: 0;
+}
+
+marquee ul li {
+    border-bottom: 1px solid black;
+    background-color: rgb(2, 19, 26);
+    padding: 4px;
+    margin-bottom: 2px;
+}
+
+marquee ul li:hover {
+    background-color: aqua;
+}
+
+
+
+    </style>
+</head>
+<body style="background-image: url({% static 'assets/img/patient.jpg' %})" class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" data-widget="pushmenu"
+                                href="#" role="button"><i class="fas fa-bars"></i></a></li>
+    </ul>
+    <h5 class="text-center text-uppercase" style="width: 100%;"><span style="color: red">V</span>accine <span style="color: red">T</span>racker <span style="color: red">S</span>ystem</h5>
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+        <!-- Messages Dropdown Menu -->
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item"><a class="nav-link"
+                                data-widget="fullscreen" href="#" role="button"> <i
+                class="fas fa-expand-arrows-alt"></i>
+        </a></li>
+        <li class="nav-item dropdown"><a class="nav-link"
+                                        data-toggle="dropdown" href="#"> <i
+                class="far fa-bell fas-shake animated"></i>
+        </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-item dropdown-header">Accounts</span>
+                <div class="dropdown-divider"></div>
+                <a href="/logout" class="dropdown-item"> <i
+                        class="fas fa-users mr-2"></i>Logout
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'changePassword' %}" class="dropdown-item"> <i class="fas fa-key mr-2"></i>Change
+                    Password
+                </a>
+            </div>
+        </li>
+
+    </ul>
+</nav>
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+
+    <div class="sidebar ">
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column"
+                data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active" style="color: #fff;">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Home</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" style="color: #fff;">
+                        <i class="nav-icon fas fa-hospital"></i>
+                        <p>Hospitals</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" style="color: #fff;">
+                        <i class="nav-icon fas fa-user-md"></i>
+                        <p>Doctors</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" style="color: #fff;">
+                        <i class="nav-icon fas fa-info-circle"></i>
+                        <p>About Us</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" style="color: #fff;">
+                        <i class="nav-icon fas fa-phone"></i>
+                        <p>Contact Us</p>
+                    </a>
+                </li>
+            </ul>
+            <hr style="color: #fff;"><hr style="color: #fff;"><hr >
+            <div class="quote mt-4">
+                <p style="color: #fff;">
+                
+                        In the face of uncertainty, safety is our steadfast companion.
+                        Strength lies not only in resilience, but in safeguarding each other's well-being.
+                        Amidst the storm, safety becomes our guiding light.
+                        Protecting one another is not just an act of kindness, but a testament to our humanity.
+                        In these times of trial, safety is not just a choice, but a responsibility.
+                        Safety is the compass that leads us through the uncharted waters of uncertainty.
+                        In every precaution lies a promise of protection.
+                        United in vigilance, we shield each other from the unseen foe.
+                        Let safety be the melody that orchestrates our journey through the pandemic.
+                        Hand in hand, we navigate the labyrinth of challenges, guided by the beacon of safety.
+                
+                </p>
+            </div>
+        </nav>
+    </div>
+    
+
+</aside>
+
+    <!-- Bootstrap JS and jQuery (needed for Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to handle calling ambulance
+        function callAmbulance() {
+            // Your logic for calling ambulance goes here
+            alert("Ambulance called!");
+        }
+
+        // Function to handle booking a bed
+        function bookBed() {
+            // Your logic for booking a bed goes here
+            alert("Bed booked!");
+        }
+    </script>
+
+<div class="modal fade" id="addpro">
+    <div class="modal-dialog">
+        <form class="modal-content" method="post" action="{% url 'add_patient' %}">
+
+            {% csrf_token %}
+            <div class="modal-header">
+                <h5><i class="fa fa-plus"></i> Enter Your Details to Book Bed</h5>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group form-row">
+                    <label class="col-sm-4">Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="name" placeholder="Patient Name" class="form-control form-control-sm" required>
+                    </div>
+                </div>
+                <div class="form-group form-row">
+                    <label class="col-sm-4">Contact Number</label>
+                    <div class="col-sm-8">
+                        <input type="number" name="contact_number" placeholder="+91" class="form-control form-control-sm" required>
+                    </div>
+                </div>
+                <div class="form-group form-row">
+                    <label class="col-sm-4">Age</label>
+                    <div class="col-sm-8">
+                        <input type="number" name="age" placeholder="Patient Age" class="form-control form-control-sm" required>
+                    </div>
+                </div>
+                <div class="form-group form-row">
+                    <label class="col-sm-4">Gender</label>
+                    <div class="col-sm-8">
+                        <select name="sex" class="form-control form-control-sm" required>
+                            <option value="Government">Female</option>
+                            <option value="Private">Male</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group form-row">
+                    <label class="col-sm-4">Description</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="description" placeholder="" class="form-control form-control-sm" required>
+                    </div>
+                </div>
+                <div class="form-group form-row">
+                    <label class="col-sm-4">Address</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="address" placeholder="House/city/state/pincode" class="form-control form-control-sm" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value="Submit" class="btn btn-primary btn-sm">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="content-wrapper">
+    {% block main %}
+    <div class="container mt-5">
+        <h2 >Hospital Details</h2>
+        <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card" style="background-color: rgba(255, 255, 255, 0.8);">
+                <div class="card-body" style="font-family: Arial, sans-serif;">
+                    {% if hospitals %}
+                    <p style="font-weight: bold; border-bottom: 1px solid rgba(0, 0, 0, 0.2);">
+                        <i class="fas fa-city"></i> <span style="width: 150px; display: inline-block;">City:</span> {{ hospitals.city }}
+                    </p>
+                    <p style="font-weight: bold; border-bottom: 1px solid rgba(0, 0, 0, 0.2);">
+                        <i class="fas fa-bed"></i> <span style="width: 150px; display: inline-block;">Beds Available:</span> {{ hospitals.beds_available }}
+                    </p>
+                    <p style="font-weight: bold; border-bottom: 1px solid rgba(0, 0, 0, 0.2);">
+                        <i class="fas fa-user-md"></i> <span style="width: 150px; display: inline-block;">Doctors:</span> {{ hospitals.doctors }}
+                    </p>
+                    <p style="font-weight: bold; border-bottom: 1px solid rgba(0, 0, 0, 0.2);">
+                        <i class="fas fa-flask"></i> <span style="width: 150px; display: inline-block;">Oxygen Cylinders:</span> {{ hospitals.oxygen_cylinders }}
+                    </p>
+                    <p style="font-weight: bold; border-bottom: 1px solid rgba(0, 0, 0, 0.2);">
+                        <i class="fas fa-wind"></i> <span style="width: 150px; display: inline-block;">Ventilators:</span> {{ hospitals.ventilators }}
+                    </p>
+                    <p style="font-weight: bold; border-bottom: 1px solid rgba(0, 0, 0, 0.2);">
+                        <i class="fas fa-user-nurse"></i> <span style="width: 150px; display: inline-block;">Nurses Available:</span> {{ hospitals.nurses_available }}
+                    </p>
+                    <p style="font-weight: bold; border-bottom: 1px solid rgba(0, 0, 0, 0.2);">
+                        <i class="fas fa-ambulance"></i> <span style="width: 150px; display: inline-block;">Ambulances:</span> {{ hospitals.ambulances }}
+                    </p>
+                    {% endif %}
+                </div>                
+            </div>
+            
+            
+        </div>
+        <div class="col-md-6 booking-buttons">
+            <a href="#" class="btn btn-warning btn-lg float-right" data-target="#addpro" data-toggle="modal">
+                <i class="fas fa-bed"></i> Book a Bed
+            </a>
+            <a href="#" class="btn btn-danger btn-lg float-right" data-target="#addpro" data-toggle="modal">
+                <i class="fas fa-ambulance"></i> Call Ambulance
+            </a>
+            
+          
+        </div>
+        </div>
+    </div>
+    
+    {% endblock %}
+
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script>
+    // Function to handle form submission
+    $('#addpro form').submit(function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Perform an AJAX request to submit the form data
+        $.ajax({
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: $(this).serialize(),
+            success: function(response) {
+                // Show a prompt with the success message and patient's name
+                var patientName = $('input[name="name"]').val();
+                var message = "Your booking is done. You can check-in. Patient: " + patientName;
+                alert(message);
+                // Optionally, you can also close the modal here if needed
+                $('#addpro').modal('hide');
+            },
+            error: function(xhr, status, error) {
+                // Handle errors if necessary
+                console.error(error);
+            }
+        });
+    });
+</script>
+

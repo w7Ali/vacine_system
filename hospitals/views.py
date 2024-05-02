@@ -23,12 +23,36 @@ from .models import Hospital
 
 from django.http import JsonResponse
 # Create your views here.
-def hospital(request):
+def hospital(request, id):
+    hospital = Hospital.objects.filter(id=id).first()
+    return render(request, 'hospitals/patient.html', context={'hospitals': hospital})
+    
 
-    pass
+from rest_framework import serializers
+from .models import Patient
+
+class PatientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Patient
+        fields = '__all__'
+
+from django.views.decorators.http import require_POST
+from .forms import PatientForm
 
 
-
+@api_view(['GET', 'POST'])
+def add_patient(request):
+    if request.method == 'GET':
+        patients = Patient.objects.all()
+        serializer = PatientSerializer(patients, many=True)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        serializer = PatientSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 @login_required
 def city_list(request):
     cities = City.objects.all()

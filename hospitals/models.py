@@ -23,3 +23,14 @@ class Hospital(models.Model):
 
     def __str__(self):
         return self.name
+
+class Patient(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.PositiveIntegerField()
+    contact_number = models.IntegerField()
+    sex = models.CharField(max_length=10)
+    address = models.CharField(max_length=200)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name

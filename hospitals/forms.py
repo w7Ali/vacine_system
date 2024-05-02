@@ -1,5 +1,5 @@
 from django import forms
-from .models import City, Hospital
+from .models import City, Hospital, Patient
 
 input_css = 'form-control'
 
@@ -23,6 +23,15 @@ class HospitalForm(forms.ModelForm):
     class Meta:
         model = Hospital
         fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        add_input_css_class(self)  # Apply CSS class using the utility function
+
+class PatientForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = ['name', 'age', 'sex', 'address', 'description']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
