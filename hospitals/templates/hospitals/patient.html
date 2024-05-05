@@ -3,7 +3,7 @@
 <head runat="server">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Dashboard</title>
+    <title>Patient</title>
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"/>
     <link href="{% static 'css/all.css' %}" rel="stylesheet"/>
     <link href="{% static 'css/adminlte.css' %}" rel="stylesheet"/>
@@ -152,7 +152,7 @@ marquee ul li:hover {
             <ul class="nav nav-pills nav-sidebar flex-column"
                 data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active" style="color: #fff;">
+                    <a href="{% url 'index' %}" class="nav-link active" style="color: #fff;">
                         <i class="nav-icon fas fa-home"></i>
                         <p>Home</p>
                     </a>

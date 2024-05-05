@@ -15,7 +15,6 @@
     <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
     <link href="{% static 'js/jquer.min.js' %}" rel="apple-touch-icon">
 
-    jquer.min.js
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
           rel="stylesheet">
@@ -75,9 +74,9 @@
         }
 
         .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+    position: relative;
+    display: inline-block;
+}
 
         .dropdown-content {
             position: relative;
@@ -89,13 +88,15 @@
         }
 
         .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-        }
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+}
+.dropdown-content a:hover {
 
-        .dropdown a:hover {
-            background-color: #ddd;}
+    background-color: #ddd;
+}
 
         .show {
             display: block;
@@ -114,11 +115,10 @@
         <h1 class="logo me-auto"><a href="{% url 'index' %}"><span style="text-shadow: 1px 1px 1px white;">Vaccine Tracker System </span></a></h1>
         <nav id="navbar" class="navbar">
             <ul>
-                <li class="dropdown" onmouseover="toggleDropdown()" onmouseout="toggleDropdown()" class="dropbtn">Hospitals
+                <li class="dropdown" onclick="toggleDropdown()" onclick="toggleDropdown()" class="dropbtn">Hospitals
                     <ul id="myDropdown" class="dropdown-content">
                         <input type="text" placeholder="Search.." id="myInput" onkeyup="filterCities()">
-
-                </ul>
+                    </ul>
                 </li>      
                 <li><a href="{% url 'index' %}" class="active">Home</a></li>
                 <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
@@ -126,7 +126,8 @@
             </ul>
         </nav>
     </div>
-    <div  style="z-index: 999; position: absolute; right: 162px;  top: 50; bottom: -89px;  display: block;" >
+    <div>
+    <div style="z-index: 999; position: absolute; right: 162px;  top: 50; bottom: -89px;  display: block;" >
         <div id="hospitalsDropdown" class="dropdown-content">
             <ul></ul>
         </div>
@@ -565,6 +566,9 @@
 <script>
 function toggleDropdown() {
     document.getElementById("myDropdown").classList.toggle("show");
+}
+function toggleDropdownHospitals() {
+    document.getElementById("hospitalsDropdown").classList.toggle("show");
 }
 
 function filterCities() {
